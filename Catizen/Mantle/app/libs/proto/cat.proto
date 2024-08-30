@@ -1,0 +1,694 @@
+syntax = "proto3";
+package pb;
+message ItemInfo {
+  int32 id = 1;
+  int64 num = 2;
+  int64 delta = 3;
+}
+message ItemDeltaInfo {
+  int32 id = 1;
+  int32 delta = 2;
+}
+message TokensInfo {
+  string fishCoinDelta = 1;
+  string fishCoin = 2;
+  string goldDelta = 3;
+  string gold = 4;
+}
+message TokensChangeInfo {
+  string fishCoinDelta = 1;
+  string fishCoin = 2;
+  string goldDelta = 3;
+  string gold = 4;
+  string wCatiDelta = 5;
+  string wCati = 6;
+}
+message Count {
+  int32 count = 1;
+  int64 refreshTime = 2;
+}
+message FishData {
+  map<int32, int32> counts = 1;
+  int64 refreshTime = 2;
+  int32 fishNum = 3;
+  repeated float sumR = 4;
+  int64 eventTime = 5;
+  int32 eventCount = 6;
+}
+message ExData {
+  map<int32, int32> times = 1;
+  map<int32, int32> catNum = 2;
+  map<int32, int32> catNumFish = 3;
+  int32 maxCatLvl = 5;
+  int64 speedFreeTime = 6;
+  int64 offLine = 7;
+  map<int32, int32> buyGoods = 9;
+  int64 SpeedChainTime = 10;
+  int32 freeCatLvl = 11;
+  repeated int64 pendingCheckIns = 12;
+  int32 autoMerge = 13;
+  int32 fishRobLvl = 14;
+}
+message RandomEventData {
+  int32 isDone = 1;
+  int32 type = 2;
+  int64 time = 3;
+  int32 boxNum = 4;
+  int64 multipleTime = 5;
+  int32 isOffLineDone = 6;
+}
+message SysMsgParam {
+  string val = 1;
+  int32 valType = 2;
+}
+message UserInfo {
+  int32 id = 1;
+  int32 accountId = 2;
+  string accountName = 3;
+  int32 sex = 4;
+  string name = 5;
+  int64 icon = 6;
+  string gold = 7;
+  string rankGold = 8;
+  repeated int32 cats = 9;
+  int64 goldTime = 10;
+  string offGold = 11;
+  int64 boostEndTime = 12;
+  int64 offTime = 13;
+  string fishCoin = 14;
+  map<int32, int64> bag = 15;
+  map<int32, Count> counts = 16;
+  ExData exData = 17;
+  FishData fishData = 18;
+  string wallet = 19;
+  int32 bcId = 20;
+  int32 Inviter = 21;
+  RandomEventData randomEvent = 22;
+  int64 loginTime = 23;
+  map<int32, StakeCat> stakeCats = 24;
+  string wCati = 25;
+  int32 channelID = 26;
+}
+message StakeCat {
+  int32 launchId = 1;
+  int64 endTime = 2;
+}
+message ServerTimeInfo {
+  int64 serverTime = 1;
+  int32 serverZoneTime = 2;
+  int64 todayZeroTime = 3;
+  int64 mondayZeroTime = 4;
+}
+message RankUser {
+  int32 userId = 1;
+  int64 rank = 2;
+  string name = 3;
+  int64 icon = 4;
+  string clubName = 5;
+  string score = 6;
+  int32 rankKey = 7;
+  repeated int32 rankKeys = 8;
+  int32 character = 9;
+  int32 channelID = 10;
+}
+message RankClub {
+  int32 id = 1;
+  int32 rank = 2;
+  string name = 3;
+  int64 icon = 4;
+  int32 population = 5;
+  string score = 6;
+}
+message ArenaClubRank {
+  repeated RankClub rankList = 1;
+}
+message Location {
+  int32 x = 1;
+  int32 y = 2;
+}
+message CountInfo {
+  int32 countType = 1;
+  int32 count = 2;
+}
+message entropy {
+  map<int32, float> Data = 1;
+}
+message InviterUser {
+  int32 id = 1;
+  int32 rank = 2;
+  int64 icon = 3;
+  string name = 4;
+  int32 inviteCount = 5;
+  string income = 6;
+  int32 league = 7;
+  string rankGold = 8;
+  int32 channelID = 9;
+}
+message LaunchPool {
+  int32 id = 1;
+  int32 type = 2;
+  int32 scoreRate = 3;
+  int64 totalPlayer = 4;
+  int64 totalStake = 5;
+  int64 myStake = 6;
+  string waitScore = 7;
+  string gotScore = 8;
+  int32 stakeLimit = 9;
+  string hourScoreLimit = 10;
+}
+message Launch {
+  int32 id = 1;
+  int32 name = 2;
+  int64 startTime = 3;
+  int64 endTime = 4;
+  string totalScore = 5;
+  LaunchPool catPool = 6;
+  LaunchPool fishPool = 7;
+}
+message ItemChangeNtf {
+  repeated ItemInfo items = 1;
+}
+message CountsChangeNtf {
+  map<int32, Count> counts = 1;
+}
+message CSMessage {
+  int32 cmdId = 1;
+  int32 transId = 2;
+  bytes body = 3;
+}
+message BindWalletReq {
+  int32 msgId = 1;
+  string wallet = 2;
+  string sign = 3;
+}
+message BindWalletAck {}
+message GenerateCatReq {
+  int32 lvl = 1;
+  int32 Type = 2;
+}
+message GenerateCatAck {
+  int32 index = 1;
+  int32 catLvl = 2;
+  string gold = 3;
+  string fishCoin = 4;
+  int32 catNum = 5;
+  int32 catNumFish = 6;
+}
+message MergeCatReq {
+  repeated int32 indexs = 1;
+}
+message MergeCatAck {
+  repeated int32 cats = 1;
+}
+message MergeCatAutoReq {}
+message MergeCatAutoAck {
+  string fishCoin = 1;
+  int32 autoMerge = 2;
+}
+message DelCatReq {
+  repeated int32 indexs = 1;
+}
+message DelCatAck {
+  repeated int32 cats = 1;
+}
+message GetAirDropCatReq {}
+message GetAirDropCatAck {
+  repeated int32 cats = 1;
+  int32 airdropIndex = 2;
+  int64 airdropTime = 3;
+}
+message GetFreeCatReq {}
+message GetFreeCatAck {
+  int32 catLvl = 1;
+}
+message SwitchPosCatReq {
+  repeated int32 indexs = 1;
+}
+message SwitchPosCatAck {
+  repeated int32 cats = 1;
+}
+message GatherGoldReq {}
+message GatherGoldAck {
+  string gold = 1;
+  int64 goldTime = 2;
+}
+message OffLineGoldNtf {
+  string offGold = 1;
+}
+message GetOffLineGoldReq {
+  int64 Type = 1;
+}
+message GetOffLineGoldAck {
+  string gold = 1;
+  string offGold = 2;
+  int64 goldTime = 3;
+  string fishCoin = 4;
+}
+message BoostGoldReq {
+  int32 Type = 1;
+}
+message BoostGoldAck {
+  int64 boostEndTime = 1;
+  int64 SpeedFreeTime = 2;
+  string fishCoin = 3;
+  int64 SpeedChainTime = 4;
+}
+message BoostGoldNtf {
+  int64 boostEndTime = 1;
+  int64 SpeedFreeTime = 2;
+  int64 SpeedChainTime = 3;
+}
+message CreateClubReq {
+  string name = 1;
+  int32 currencyType = 2;
+}
+message CreateClubAck {
+  ClubInfo club = 1;
+  repeated MemberInfo members = 2;
+}
+message JoinClubReq {
+  int32 id = 1;
+}
+message JoinClubAck {
+  ClubInfo club = 1;
+}
+message ClubInfo {
+  int32 id = 1;
+  int64 icon = 2;
+  string name = 3;
+  int32 league = 4;
+  int32 population = 5;
+  int32 chairmanId = 6;
+  string rankGold = 7;
+  int32 boostVal = 8;
+  string groupId = 9;
+}
+message ClubInfoNtf {
+  ClubInfo club = 1;
+}
+message GetRecruitClubListReq {}
+message GetRecruitClubListAck {
+  repeated ClubInfo list = 1;
+}
+message QuitClubReq {}
+message QuitClubAck {
+  int32 success = 1;
+}
+message MemberInfo {
+  int32 id = 1;
+  int32 rank = 2;
+  int64 icon = 3;
+  string name = 4;
+  string rankValue = 5;
+  int32 clubId = 6;
+}
+message inviteRankPlayer {
+  string icon = 1;
+  string name = 2;
+  int32 inviteCount = 3;
+  string totalIncome = 4;
+}
+message ClubMemberRankReq {
+  int32 id = 1;
+  int32 timeType = 2;
+}
+message ClubMemberRankAck {
+  repeated RankUser rankList = 1;
+  RankUser myRank = 2;
+}
+message GetStatsReq {}
+message GetStatsAck {
+  string totalBalance = 1;
+  int32 totalPlayers = 2;
+  int32 dailyUsers = 3;
+  int32 online = 4;
+  string totalEarned = 5;
+  string spentAndBurned = 6;
+  repeated int64 icons = 7;
+  int32 premiumPlayers = 8;
+}
+message GetGoldRankListReq {
+  int32 league = 1;
+  int32 timeType = 2;
+}
+message GetGoldRankListAck {
+  RankUser myInfo = 1;
+  repeated RankUser rankList = 2;
+}
+message GetMyRankReq {}
+message GetMyRankAck {
+  int32 rank = 1;
+  int32 league = 2;
+  string rankGold = 3;
+}
+message GetClubGoldRankListReq {
+  int32 league = 1;
+  int32 timeType = 2;
+}
+message GetClubGoldRankListAck {
+  repeated RankClub rankList = 1;
+  RankClub myRank = 2;
+}
+message clubMemberPlayer {
+  string icon = 1;
+  string name = 2;
+  string rankValue = 3;
+}
+message ClubInfoReq {
+  int32 id = 1;
+}
+message ClubInfoAck {
+  ClubInfo club = 1;
+}
+message FrensInfoReq {}
+message FrensInfoAck {
+  repeated InviterUser friendList = 1;
+  string fishCoin = 2;
+  int32 inviteCount = 3;
+}
+message FrensInviterDoubleInfoReq {}
+message FrensInviterDoubleInfoAck {
+  int64 startTime = 1;
+  int64 endTime = 2;
+}
+message InviteRankListReq {}
+message InviteRankListAck {
+  InviterUser myInfo = 1;
+  repeated InviterUser rankList = 2;
+}
+message GoldChangeNtf {
+  string gold = 1;
+  string fishCoin = 2;
+}
+message RandomEventReq {}
+message RandomEventAck {
+  RandomEventData randomEventData = 1;
+}
+message GetRandomEventAwardReq {
+  int32 opType = 1;
+}
+message GetRandomEventAwardAck {
+  string fishCoin = 1;
+  RandomEventData randomEventData = 2;
+}
+message GetRandomEventBoxReq {}
+message GetRandomEventBoxAck {
+  repeated int32 cats = 1;
+  RandomEventData randomEventData = 2;
+}
+message MessageEventNtf {
+  int32 retCode = 1;
+  string msg = 2;
+  int32 eventType = 3;
+}
+message ExitClubReq {
+  string pwd = 1;
+}
+message ExitClubAck {
+  int64 exitTime = 1;
+}
+message ClubGroupUserNameReq {
+  string groupUserId = 1;
+  int32 clubId = 2;
+}
+message ClubGroupUserNameAck {
+  string groupUserName = 1;
+}
+message ErrorAck {
+  int32 code = 1;
+  int32 langId = 2;
+}
+message ServerStateNtf {
+  int32 serverType = 1;
+  int32 offline = 2;
+}
+message HeartBeatReq {}
+message HeartBeatAck {}
+message JumpServerReq {
+  int32 jumpTo = 1;
+  int32 serverId = 2;
+}
+message JumpServerAck {
+  int32 serverId = 1;
+  int32 mapId = 2;
+  int32 logicType = 3;
+  int32 logicId = 4;
+}
+message GetLaunchListReq {}
+message GetLaunchListAck {
+  repeated Launch launchList = 1;
+  int32 inviterNum = 2;
+  int64 BoostEndTime = 3;
+}
+message LaunchStakeReq {
+  int32 launchId = 1;
+  int32 poolId = 2;
+  int64 stakeNum = 3;
+  int32 isRetrieve = 4;
+}
+message LaunchStakeAck {
+  string fishCoin = 1;
+  map<int32, StakeCat> stakeCats = 2;
+  int64 totalPlayer = 3;
+  int64 totalStake = 4;
+  int64 myStake = 5;
+}
+message RetrieveStakeReq {
+  int32 launchId = 1;
+  int32 poolId = 2;
+  int64 retrieveNum = 3;
+}
+message RetrieveStakeAck {
+  LaunchPool poolInfo = 1;
+  string fishCoin = 2;
+  map<int32, StakeCat> stakeCats = 3;
+}
+message ReceiveLaunchProfitReq {
+  int32 launchId = 1;
+  int32 poolId = 2;
+}
+message ReceiveLaunchProfitAck {
+  string wCATI = 1;
+  string waitScore = 2;
+  string gotScore = 3;
+}
+message LaunchPoolBonusNtf {
+  int32 launchId = 1;
+  int32 poolId = 2;
+  string addWaitScore = 3;
+  string waitScore = 4;
+}
+message EnterGameReq {
+  int32 accountId = 1;
+  int32 serverId = 2;
+  string token = 3;
+  string name = 4;
+  int32 time = 5;
+  int32 sex = 6;
+  string nickName = 7;
+  string newNickName = 8;
+  int32 relogin = 9;
+  string inviteCode = 10;
+  int32 userId = 11;
+  int32 bcId = 12;
+  int32 inviterId = 13;
+  int32 inviterClubId = 14;
+}
+message EnterGameAck {
+  int32 code = 1;
+  int32 serverId = 2;
+  UserInfo userInfo = 3;
+  ServerTimeInfo serverTimeInfo = 4;
+  int32 bcId = 5;
+}
+message CreateRoleReq {
+  int32 sex = 1;
+  string nickName = 2;
+}
+message CreateRoleAck {
+  UserInfo userInfo = 1;
+  ServerTimeInfo serverTimeInfo = 2;
+}
+message CommandReq {
+  string command = 1;
+  int32 rev = 2;
+}
+message CommandAck {
+  string extra = 1;
+}
+message GetCommentTokenReq {}
+message GetCommentTokenAck {
+  string token = 1;
+  int64 ts = 2;
+  int32 militaryGrade = 3;
+}
+message UserInfoNtf {
+  UserInfo userInfo = 1;
+}
+message RequestPrePayReq {
+  int32 id = 1;
+}
+message RequestPrePayAck {
+  int32 id = 1;
+  string tonPrice = 2;
+  string mntPrice = 3;
+  string notPrice = 4;
+}
+message RequestPayReq {
+  int32 id = 1;
+  int32 payType = 2;
+  string currencyCode = 3;
+}
+message RequestPayAck {
+  PayData payData = 1;
+}
+message CheckPayReq {
+  string checkData = 1;
+  PayData payData = 2;
+  string transId = 3;
+}
+message CheckPayAck {
+  int32 isSucc = 1;
+}
+message PayData {
+  int32 rechargeId = 1;
+  string productID = 2;
+  string price = 3;
+  string orderNo = 4;
+  string payload = 5;
+  string paylink = 6;
+  string amount = 7;
+  string walletAddress = 8;
+}
+message PayClubBoosterReq {
+  int32 clubId = 1;
+  int32 amount = 2;
+  int32 payType = 3;
+  string currencyCode = 4;
+}
+message PayClubBoosterAck {
+  PayData payData = 1;
+}
+message BCCheckInReq {
+  int32 checkInType = 1;
+}
+message BCCheckInAck {
+  PayData payData = 1;
+}
+message TonExchangeRateReq {}
+message TonExchangeRateAck {
+  string Ton2Usd = 1;
+  string Usd2Ton = 2;
+  string Mnt2Usd = 3;
+  string Usd2Mnt = 4;
+  string Not2Usd = 5;
+  string Usd2Not = 6;
+}
+message SysMsgNtf {
+  SysMsg msg = 1;
+}
+message SysMsg {
+  int32 msgType = 1;
+  int32 msgId = 2;
+  repeated SysMsgParam param = 3;
+  string msg = 4;
+  int32 extra1 = 5;
+  int32 extra2 = 6;
+}
+message WatchMsgReq {
+  int32 watchType = 1;
+  int32 extParam = 2;
+}
+message WatchMsgAck {}
+message UnWatchMsgReq {
+  int32 watchType = 1;
+}
+message UnWatchMsgAck {}
+message ExDataNtf {
+  ExData exData = 1;
+}
+message FishingReq {
+  int32 color = 1;
+}
+message FishingAck {
+  repeated ItemInfo items = 1;
+  int32 weight = 2;
+  int32 fishId = 3;
+  int32 myOldMax = 4;
+  int32 myNewMax = 5;
+  int32 oldMax = 6;
+  int32 newMax = 7;
+  string addgold = 8;
+  string gold = 9;
+  string addFishCoin = 10;
+  string fishCoin = 11;
+  FishData fishData = 12;
+}
+message FishRodUpReq {}
+message FishRodUpAck {
+  int32 FishRodLvl = 1;
+  string fishCoin = 3;
+}
+message MyFishInfoReq {}
+message MyFishInfoAck {
+  int64 myRank = 1;
+  int32 myScore = 2;
+  int32 myRankKey = 3;
+  string gold = 4;
+  string rewardGold = 5;
+  int64 rewardRank = 6;
+  int32 fishRobLvl = 7;
+}
+message GetFishRankRewardReq {}
+message GetFishRankRewardAck {
+  repeated ItemInfo Reward = 1;
+}
+message FishRankListReq {}
+message FishRankListAck {
+  repeated RankUser rankList = 1;
+}
+message FishInfoReq {
+  int32 id = 1;
+}
+message FishInfoAck {
+  int32 maxWeight = 1;
+  string name = 2;
+}
+message FishRewardPoolReq {}
+message FishRewardPoolAck {
+  int64 count = 1;
+}
+message FishHistoryReq {}
+message FishHistoryAck {
+  repeated SysMsg list = 1;
+}
+message SyncRechargeNtf {
+  repeated int32 ids = 1;
+}
+message ReceiveRechargeReq {
+  int32 id = 1;
+}
+message ReceiveRechargeAck {
+  string addFishCoin = 1;
+  string FishCoin = 2;
+  int32 GoodsId = 3;
+  string addGold = 4;
+  string Gold = 5;
+}
+message AccountInfoChangeNtf {
+  int32 status = 1;
+  string wallet = 2;
+  int64 accountStatusEndTime = 3;
+}
+message TokensInfoChangeNtf {
+  TokensChangeInfo info = 1;
+}
+message RandomEventChangeNtf {
+  RandomEventData randomEventData = 1;
+}
+message GetWalletAddrReq {
+  string rawAddress = 1;
+}
+message GetWalletAddrAck {
+  string Address = 1;
+}
